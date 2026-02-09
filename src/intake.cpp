@@ -16,6 +16,7 @@ void intake_opcontrol(){
     Middle.button_toggle(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN));
     Wing.button_toggle(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1));
     MatchLoad.button_toggle(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2));
+    LowScore.button_toggle(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y));
 
     master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B) ? intake_type = !intake_type : intake_type = intake_type;
 }
