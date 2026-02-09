@@ -9,9 +9,6 @@ void intake_opcontrol(){
     }else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
         intake.move(-127);
         outtake.move(-127);
-    }else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)){
-        intake.move(127);
-        outtake.move(-127);
     }else{
         intake.move(0);
         outtake.move(0);

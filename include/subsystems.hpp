@@ -8,10 +8,10 @@ extern Drive chassis;
 
 // Your motors, sensors, etc. should go here.  Below are examples
 
-inline pros::Motor outtake(-2);
-inline pros::Motor intake(1);
+inline pros::Motor outtake(-8);
+inline pros::Motor intake(6);
 
 inline ez::Piston Middle('A');
-inline ez::Piston Wing('B');
+inline ez::Piston Wing('D');
 inline ez::Piston MatchLoad('C');
-// inline pros::adi::DigitalIn limit_switch('A');
+inline ez::Piston LowScore('B');

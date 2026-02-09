@@ -9,10 +9,10 @@
 // Chassis constructor
 ez::Drive chassis(
     // These are your drive motors, the first motor is used for sensing!
-    {1, 2, 3},     // Left Chassis Ports (negative port will reverse it!)
-    {-4, -5, -6},  // Right Chassis Ports (negative port will reverse it!)
+    {-11, -12, 13},     // Left Chassis Ports (negative port will reverse it!)
+    {18, 19, -20},  // Right Chassis Ports (negative port will reverse it!)
 
-    7,      // IMU Port
+    1,      // IMU Port
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     480);   // Wheel RPM = cartridge * (motor gear / wheel gear)
 
@@ -21,12 +21,12 @@ ez::Drive chassis(
 //  - you should get positive values on the encoders going FORWARD and RIGHT
 // - `2.75` is the wheel diameter
 // - `4.0` is the distance from the center of the wheel to the center of the robot
-ez::tracking_wheel horiz_tracker(8, 2, 4.0);  // This tracking wheel is perpendicular to the drive wheels
-ez::tracking_wheel vert_tracker(9, 2.75, 4.0);   // This tracking wheel is parallel to the drive wheels
-DSRDS D1(18, Front, 0, 4); //DSR front distance sensor (port, direction, offset in direction in inches)
-DSRDS D2(19, Left, 0, 4); //DSR left distance sensor (port, direction, offset in direction in inches)
-DSRDS D3(20, Back, 0, 4); //DSR back distance sensor (port, direction, offset in direction in inches)
-DSRDS D4(21, Right, 0, 4); //DSR right distance sensor (port, direction, offset in direction in inches)
+ez::tracking_wheel horiz_tracker(7, 2.75, 4.0);  // This tracking wheel is perpendicular to the drive wheels
+ez::tracking_wheel vert_tracker(16, 2, 4.0);   // This tracking wheel is parallel to the drive wheels
+DSRDS D1(15, Front, 0, 4); //DSR front distance sensor (port, direction, offset in direction in inches)
+DSRDS D2(2, Left, 0, 4); //DSR left distance sensor (port, direction, offset in direction in inches)
+DSRDS D3(14, Back, 0, 4); //DSR back distance sensor (port, direction, offset in direction in inches)
+DSRDS D4(17, Right, 0, 4); //DSR right distance sensor (port, direction, offset in direction in inches)
 
 
 /**
