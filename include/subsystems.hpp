@@ -11,7 +11,7 @@ extern Drive chassis;
 inline pros::Motor outtake(-8);
 inline pros::Motor intake(6);
 
-inline ez::Piston Middle('A');
+inline ez::Piston Middle('A', true);
 inline ez::Piston Wing('D');
-inline ez::Piston MatchLoad('C');
+inline ez::Piston MatchLoad('C', true);
 inline ez::Piston LowScore('B');

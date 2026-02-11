@@ -65,12 +65,12 @@ class DSRDS{
     /*!
     * \brief read from the sensor in inches
     */
-    double read_raw_in();
+    double read_raw_in(int time_out = 60000);
 
     /*!
     * \brief read with offsets applied, used for odom resets
     */
-    double read(Dir direction);
+    double read(int time_out = 60000);
 
     /*!
     * \brief set x offset

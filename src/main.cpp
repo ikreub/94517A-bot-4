@@ -1,4 +1,5 @@
 #include "main.h"
+#include "autons.hpp"
 #include "dsr.hpp"
 
 /////
@@ -10,7 +11,7 @@
 ez::Drive chassis(
     // These are your drive motors, the first motor is used for sensing!
     {-11, -12, 13},     // Left Chassis Ports (negative port will reverse it!)
-    {18, 19, -20},  // Right Chassis Ports (negative port will reverse it!)
+    {-18, 19, 20},  // Right Chassis Ports (negative port will reverse it!)
 
     1,      // IMU Port
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
@@ -21,12 +22,12 @@ ez::Drive chassis(
 //  - you should get positive values on the encoders going FORWARD and RIGHT
 // - `2.75` is the wheel diameter
 // - `4.0` is the distance from the center of the wheel to the center of the robot
-ez::tracking_wheel horiz_tracker(7, 2.75, 4.0);  // This tracking wheel is perpendicular to the drive wheels
-ez::tracking_wheel vert_tracker(16, 2, 4.0);   // This tracking wheel is parallel to the drive wheels
-DSRDS D1(15, Front, 0, 4); //DSR front distance sensor (port, direction, offset in direction in inches)
-DSRDS D2(2, Left, 0, 4); //DSR left distance sensor (port, direction, offset in direction in inches)
-DSRDS D3(14, Back, 0, 4); //DSR back distance sensor (port, direction, offset in direction in inches)
-DSRDS D4(17, Right, 0, 4); //DSR right distance sensor (port, direction, offset in direction in inches)
+ez::tracking_wheel horiz_tracker(7, 2.75, -.79);  // This tracking wheel is perpendicular to the drive wheels
+ez::tracking_wheel vert_tracker(-16, 2, -1.13);   // This tracking wheel is parallel to the drive wheels
+DSRDS D1(15, Front, -3.28, -5.24); //DSR front distance sensor (port, direction, offset in direction in inches)
+DSRDS D2(2, Left, 0.26, 0.85); //DSR left distance sensor (port, direction, offset in direction in inches)
+DSRDS D3(14, Back, 0.99, 0.11); //DSR back distance sensor (port, direction, offset in direction in inches)
+DSRDS D4(17, Right, 0.05, 0.47); //DSR right distance sensor (port, direction, offset in direction in inches)
 
 
 /**
@@ -79,7 +80,8 @@ void initialize() {
       {"Boomerang\n\nGo to (0, 24, 45) then come back to (0, 0, 0)", odom_boomerang_example},
       {"Boomerang Pure Pursuit\n\nGo to (0, 24, 45) on the way to (24, 24) then come back to (0, 0, 0)", odom_boomerang_injected_pure_pursuit_example},
       {"Measure Offsets\n\nThis will turn the robot a bunch of times and calculate your offsets for your tracking wheels.", measure_offsets},
-  });
+      {"Measure DSR offsets", measure_dsr_offsets},
+    });
 
   // Initialize chassis and auton selector
   chassis.initialize();
@@ -187,8 +189,8 @@ void ez_screen_task() {
           screen_print_tracker(chassis.odom_tracker_front, "f", 7);
         }
         if(ez::as::page_blank_is_on(1)){
-            for(unsigned int i = 0; i < DSR::sensors.size(); i++){
-            ez::screen_print(DSR::sensors[i].get_dir_string() + " sensor: " + util::to_string_with_precision(DSR::sensors[i].read_raw_in()) + " norm: " + util::to_string_with_precision(DSR::sensors[i].read(get_robot_dir())), 1 + int(i));
+          for(unsigned int i = 0; i < DSR::sensors.size(); i++){
+            ez::screen_print(DSR::sensors[i].get_dir_string() + " sensor: " + util::to_string_with_precision(DSR::sensors[i].read_raw_in(10)) + " norm: " + util::to_string_with_precision(DSR::sensors[i].read(10)), 1 + int(i));
           }
         }
         if(ez::as::page_blank_is_on(2)){

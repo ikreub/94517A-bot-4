@@ -19,3 +19,6 @@ void measure_offsets();
 void measure_dsr_offsets();
 
 void test();
+
+void Right_7();
+void skills_102();

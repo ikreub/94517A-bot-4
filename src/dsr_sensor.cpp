@@ -1,9 +1,12 @@
 #include "../include/dsr.hpp"
+#include "EZ-Template/util.hpp"
 #include "main.h"
 
 //https://www.desmos.com/calculator/f8689a01ef
 //this explains the numbers below, which are used to measure the offsets of the sensors from the center of the robot.
 //(these numbers are converted specifically for the way i coded it so 25.4 times what the graph has)
+
+const bool debug = false;
 
 const double Xa = 1.83195123007;
 const double Xb = 4.90508341504;
@@ -23,18 +26,25 @@ double DSRDS::read_raw(){
     return sensor.get_distance();
 }
 
-double DSRDS::read_raw_in(){
+double DSRDS::read_raw_in(int time_out){
     double reading = 9999;
-    for(int i = 0; reading >= 9999 || reading < 0; i++){
+    for(int i = 0; (reading >= 9999 || reading < 0) && time_out > 0; i++){
         reading = read_raw();
         pros::delay(10);
+        time_out -= 10;
+        if(debug){
+            ez::screen_print(dir_string + ": fail " + util::to_string_with_precision(i) + " value: " + util::to_string_with_precision(reading), 7);
+        }
+    }
+    if(debug){
+        //ez::screen_print(dir_string + ": success", 7);
     }
     return reading / 25.4;
 }
 
-double DSRDS::read(Dir direction){
-    double angle = util::to_rad(chassis.odom_theta_get() - 90 * (int(dir) + int(direction)));
-    return (read_raw_in() + y_offset) * cos(angle) - x_offset * sin(angle);
+double DSRDS::read(int time_out){
+    double angle = util::to_rad(fmod(chassis.odom_theta_get() + 45, 90) - 45);
+    return (read_raw_in(time_out) + y_offset) * cos(angle) - x_offset * sin(angle);
 }   
 
 void DSRDS::set_x_offset(double x){

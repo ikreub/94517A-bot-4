@@ -1,7 +1,7 @@
 #include "intake.hpp"
 #include "pros/misc.h"
 
-bool intake_type;
+bool intake_type = false;
 void intake_opcontrol(){
     if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)){
         intake.move(127);
