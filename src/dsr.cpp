@@ -17,7 +17,7 @@ int Ysen;
 double robot_angle;
 const double feild_size = 140.94488189; //currently code is designed for 144 inches feild
 
-const bool debug = true;
+const bool debug = false;
 
 double deg_mod(double num){
     bool is_done = false;
@@ -61,26 +61,26 @@ void odom_reset(Dir senX_dir, Dir Xdir, int Xsen, Dir senY_dir, Dir Ydir, int Ys
 
     //reset the tracking values based on the sensor readings and the direction of the sensors
     if(int(senX_dir) == int(Xdir)){
-        chassis.odom_x_set(DSR::sensors[Xsen].read(Ydir));
+        chassis.odom_x_set(DSR::sensors[Xsen].read());
         if(debug){
-            ez::screen_print("X: true     Raw: " + util::to_string_with_precision(DSR::sensors[Xsen].read(Ydir)) + " true: " + util::to_string_with_precision(DSR::sensors[Xsen].read_raw_in()),5);
+            ez::screen_print("X: true     Raw: " + util::to_string_with_precision(DSR::sensors[Xsen].read()) + " true: " + util::to_string_with_precision(DSR::sensors[Xsen].read_raw_in()),5);
         }
     }else{
-        chassis.odom_x_set(feild_size - DSR::sensors[Xsen].read(Ydir));
+        chassis.odom_x_set(feild_size - DSR::sensors[Xsen].read());
         if(debug){
-            ez::screen_print("X: false     Raw: " + util::to_string_with_precision(DSR::sensors[Xsen].read(Ydir)) + " true: " + util::to_string_with_precision(DSR::sensors[Xsen].read_raw_in()),5);
+            ez::screen_print("X: false     Raw: " + util::to_string_with_precision(DSR::sensors[Xsen].read()) + " true: " + util::to_string_with_precision(DSR::sensors[Xsen].read_raw_in()),5);
         }
     }
 
     if(int(senY_dir) == int(Ydir)){
-        chassis.odom_y_set(DSR::sensors[Ysen].read(Ydir));
+        chassis.odom_y_set(DSR::sensors[Ysen].read());
         if(debug){
-            ez::screen_print("Y: true     Raw: " + util::to_string_with_precision(DSR::sensors[Ysen].read(Ydir)) + " true: " + util::to_string_with_precision(DSR::sensors[Ysen].read_raw_in()), 6);
+            ez::screen_print("Y: true     Raw: " + util::to_string_with_precision(DSR::sensors[Ysen].read()) + " true: " + util::to_string_with_precision(DSR::sensors[Ysen].read_raw_in()), 6);
         }
     }else{
-        chassis.odom_y_set(feild_size - DSR::sensors[Ysen].read(Ydir));
+        chassis.odom_y_set(feild_size - DSR::sensors[Ysen].read());
         if(debug){
-            ez::screen_print("Y: false     Raw: " + util::to_string_with_precision(DSR::sensors[Ysen].read(Ydir)) + " true: " + util::to_string_with_precision(DSR::sensors[Ysen].read_raw_in()), 6);
+            ez::screen_print("Y: false     Raw: " + util::to_string_with_precision(DSR::sensors[Ysen].read()) + " true: " + util::to_string_with_precision(DSR::sensors[Ysen].read_raw_in()), 6);
         }
     }
 }

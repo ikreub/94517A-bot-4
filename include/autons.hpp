@@ -21,4 +21,6 @@ void measure_dsr_offsets();
 void test();
 
 void Right_7();
+void right_4_rush();
+
 void skills_102();

@@ -1,7 +1,7 @@
 #include "intake.hpp"
 #include "pros/misc.h"
 
-bool intake_type = false;
+bool intake_type = true;
 void intake_opcontrol(){
     if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)){
         intake.move(127);
@@ -16,7 +16,7 @@ void intake_opcontrol(){
     Middle.button_toggle(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN));
     Wing.button_toggle(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1));
     MatchLoad.button_toggle(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2));
-    LowScore.button_toggle(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y));
+    LowScore.button_toggle(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT));
 
     master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B) ? intake_type = !intake_type : intake_type = intake_type;
 }
