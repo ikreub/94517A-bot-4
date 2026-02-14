@@ -438,7 +438,7 @@ void Right_7(){
 
   //go to and intake matchloader
   intake.move(127);
-  chassis.pid_odom_set({{28_in, -1_in}, fwd, DRIVE_SPEED / 2}, true);
+  chassis.pid_odom_set({{28_in, -4_in}, fwd, DRIVE_SPEED / 2}, true);
   pros::delay(1300);
 
   //go to long goal
@@ -661,9 +661,9 @@ void Left_7(){
 
   //score in middle goal
   Middle.set(true);
-  intake.move(-127);
+  outtake.move(-127);
   pros::delay(300);
-  outtake.move(127);
+  intake.move(127);
   pros::delay(1500);
 
   //stop intake
@@ -682,7 +682,7 @@ void Left_7(){
 
   //go to and intake matchloader
   intake.move(127);
-  chassis.pid_odom_set({{-33_in, -1_in}, fwd, DRIVE_SPEED / 2}, true);
+  chassis.pid_odom_set({{-33_in, -4_in}, fwd, DRIVE_SPEED / 2}, true);
   pros::delay(1300);
 
   //go to long goal
