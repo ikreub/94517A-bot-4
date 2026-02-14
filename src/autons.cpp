@@ -439,7 +439,7 @@ void Right_7(){
   //go to and intake matchloader
   intake.move(127);
   chassis.pid_odom_set({{28_in, -1_in}, fwd, DRIVE_SPEED / 2}, true);
-  pros::delay(1500);
+  pros::delay(1300);
 
   //go to long goal
   chassis.pid_odom_set({{29_in, 28_in}, rev, DRIVE_SPEED}, true);
@@ -650,18 +650,19 @@ void Left_7(){
   chassis.pid_drive_set(3_in, DRIVE_SPEED, true);
   chassis.pid_wait_quick();
 
-  //align to low goal
+  //align to middle goal
   chassis.pid_turn_set({4_in, 48.5_in}, rev, DRIVE_SPEED);
   chassis.pid_wait();
   MatchLoad.set(false);
 
-  //go to low goal
+  //go to middle goal
   chassis.pid_odom_set({{6_in, 49.5_in}, rev, DRIVE_SPEED}, true);
   chassis.pid_wait_quick();
 
-  //score in low goal
+  //score in middle goal
   Middle.set(true);
-  intake.move(127);
+  intake.move(-127);
+  pros::delay(300);
   outtake.move(127);
   pros::delay(1500);
 
@@ -682,7 +683,7 @@ void Left_7(){
   //go to and intake matchloader
   intake.move(127);
   chassis.pid_odom_set({{-33_in, -1_in}, fwd, DRIVE_SPEED / 2}, true);
-  pros::delay(1500);
+  pros::delay(1300);
 
   //go to long goal
   chassis.pid_odom_set({{-33_in, 28_in}, rev, DRIVE_SPEED}, true);
