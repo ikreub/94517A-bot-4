@@ -23,4 +23,7 @@ void test();
 void Right_7();
 void right_4_rush();
 
+void Left_7();
+void left_4_rush();
+
 void skills_102();

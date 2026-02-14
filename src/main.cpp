@@ -67,6 +67,8 @@ void initialize() {
   ez::as::auton_selector.autons_add({
       {"right 7", Right_7},
       {"right 4 ball rush", right_4_rush},
+      {"left 7", Left_7},
+      {"left 4 ball rush", left_4_rush},
       {"skills 102", skills_102},
       {"Measure Offsets\n\nThis will turn the robot a bunch of times and calculate your offsets for your tracking wheels.", measure_offsets},
       {"Measure DSR offsets", measure_dsr_offsets},
