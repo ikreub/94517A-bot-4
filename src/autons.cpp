@@ -439,11 +439,7 @@ void Right_7(){
   //go to and intake matchloader
   intake.move(127);
   chassis.pid_odom_set({{28_in, -1_in}, fwd, DRIVE_SPEED / 2}, true);
-  chassis.pid_wait_quick_chain();
-
-  //constant presssure to make it work DO NOT REMOVE
-  chassis.drive_set(60,60);
-  pros::delay(1000);
+  pros::delay(1500);
 
   //go to long goal
   chassis.pid_odom_set({{29_in, 28_in}, rev, DRIVE_SPEED}, true);
@@ -686,7 +682,7 @@ void Left_7(){
   //go to and intake matchloader
   intake.move(127);
   chassis.pid_odom_set({{-33_in, -1_in}, fwd, DRIVE_SPEED / 2}, true);
-  chassis.pid_wait_quick_chain();
+  pros::delay(1500);
 
   //go to long goal
   chassis.pid_odom_set({{-33_in, 28_in}, rev, DRIVE_SPEED}, true);
