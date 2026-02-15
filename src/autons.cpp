@@ -749,3 +749,9 @@ void left_4_rush(){
   chassis.pid_drive_set(0_in , DRIVE_SPEED);
   pros::delay(10000);
 }
+
+void move_a_bit(){
+  chassis.drive_set(60,60);
+  pros::delay(500);
+  chassis.drive_set(0,0);
+}

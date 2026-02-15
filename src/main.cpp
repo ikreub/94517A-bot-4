@@ -72,6 +72,7 @@ void initialize() {
       {"skills 102", skills_102},
       {"Measure Offsets\n\nThis will turn the robot a bunch of times and calculate your offsets for your tracking wheels.", measure_offsets},
       {"Measure DSR offsets", measure_dsr_offsets},
+      {"move a bit", move_a_bit}
     });
 
   // Initialize chassis and auton selector

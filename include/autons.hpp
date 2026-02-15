@@ -27,3 +27,5 @@ void Left_7();
 void left_4_rush();
 
 void skills_102();
+
+void move_a_bit();
