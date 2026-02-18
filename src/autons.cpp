@@ -926,14 +926,24 @@ void left_7_rush(){
   intake.move(127);
   outtake.move(127);
   pros::delay(2100);
+
+  //reset match loader so that i dont cross
   MatchLoad.set(false);
   outtake.move(0);
+
+  //try not to crash
   chassis.pid_odom_set({{25_in, 30_in}, fwd, DRIVE_SPEED});
   chassis.pid_wait_quick_chain();
+
+  //go to descore
   chassis.pid_odom_set({{{31_in, 43_in}, fwd, DRIVE_SPEED}, {{29_in, 55_in}, fwd, DRIVE_SPEED}}, true);
   chassis.pid_wait_quick_chain();
+
+  //turn for better descore
   chassis.pid_turn_set(10_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
+
+  // hold position
   chassis.pid_drive_set(0_in, 110);
   pros::delay(10000);
 }
