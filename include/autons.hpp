@@ -21,11 +21,18 @@ void measure_dsr_offsets();
 void test();
 
 void Right_7();
-void right_4_rush();
+void Right_counter_7();
+void right_7_rush();
 
 void Left_7();
-void left_4_rush();
+void Left_counter_7();
+void left_7_rush();
 
 void skills_102();
 
 void move_a_bit();
+
+void dont_do_anything();
+
+void SAWP();
+void SAWP2();

@@ -42,8 +42,19 @@ double DSRDS::read_raw_in(int time_out){
     return reading / 25.4;
 }
 
+double deg_mod_2(double a){
+    while(a < -45 || a > 45){
+        if(a < -45){
+            a += 90;
+        }else if(a > 45){
+            a -= 90;
+        }
+    }
+    return a;
+}
+
 double DSRDS::read(int time_out){
-    double angle = util::to_rad(fmod(chassis.odom_theta_get() + 45, 90) - 45);
+    double angle = util::to_rad(deg_mod_2(chassis.odom_theta_get()));
     return (read_raw_in(time_out) + y_offset) * cos(angle) - x_offset * sin(angle);
 }   
 

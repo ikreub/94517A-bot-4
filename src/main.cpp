@@ -65,14 +65,19 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
+      {"right counter 7", Right_counter_7},
+      {"SAWP with push", SAWP},
+      {"SAWP no push", SAWP2},
       {"right 7", Right_7},
-      {"right 4 ball rush", right_4_rush},
+      {"right 7 ball rush", right_7_rush},
       {"left 7", Left_7},
-      {"left 4 ball rush", left_4_rush},
+      {"left counter 7", Left_counter_7},
+      {"left 7 ball rush", left_7_rush},
       {"skills 102", skills_102},
+      {"move a bit", move_a_bit},
+      {"dont do anything", dont_do_anything},
       {"Measure Offsets\n\nThis will turn the robot a bunch of times and calculate your offsets for your tracking wheels.", measure_offsets},
       {"Measure DSR offsets", measure_dsr_offsets},
-      {"move a bit", move_a_bit}
     });
 
   // Initialize chassis and auton selector
@@ -91,6 +96,7 @@ void initialize() {
  * the VEX Competition Switch, following either autonomous or opcontrol. When
  * the robot is enabled, this task will exit.
  */
+
 void disabled() {
   // . . .
 }
