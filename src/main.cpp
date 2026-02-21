@@ -65,10 +65,10 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
-      {"right counter 7", Right_counter_7},
-      {"SAWP with push", SAWP},
-      {"SAWP no push", SAWP2},
+      {"SAWP with push \n might maybe work, only run if you have to", SAWP},
+      {"SAWP no push \n facing towards the match loader instead of the other bot", SAWP2},
       {"right 7", Right_7},
+      {"right counter 7", Right_counter_7},
       {"right 7 ball rush", right_7_rush},
       {"left 7", Left_7},
       {"left counter 7", Left_counter_7},
