@@ -65,6 +65,7 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
+      {"skills 106", skills_106},
       {"SAWP with push \n might maybe work, only run if you have to", SAWP},
       {"SAWP no push \n facing towards the match loader instead of the other bot", SAWP2},
       {"right 7", Right_7},

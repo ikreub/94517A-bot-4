@@ -29,6 +29,7 @@ void Left_counter_7();
 void left_7_rush();
 
 void skills_102();
+void skills_106();
 
 void move_a_bit();
 

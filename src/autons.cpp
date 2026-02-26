@@ -19,7 +19,7 @@ const int SWING_SPEED = 110;
 ///
 void default_constants() {
   // P, I, D, and Start I
-  chassis.pid_drive_constants_set(13.2, 0.0, 148);    //24,0,266     // Fwd/rev constants, used for odom and non odom motions
+  chassis.pid_drive_constants_set(14.2, 0.0, 155);    //24,0,266     // Fwd/rev constants, used for odom and non odom motions
   chassis.pid_heading_constants_set(10.1, 0.0, 72.5);        // Holds the robot straight while going forward without odom
   chassis.pid_turn_constants_set(3.9, 0.05, 27.5, 15.0);     // Turn in place constants
   chassis.pid_swing_constants_set(6.0, 0.0, 70.0);           // Swing constants
@@ -62,10 +62,9 @@ void drive_example() {
   // The third parameter is a boolean (true or false) for enabling/disabling a slew at the start of drive motions
   // for slew, only enable it when the drive distance is greater than the slew distance + a few inches
 
-  chassis.pid_drive_set(48_in, DRIVE_SPEED , true);
+  chassis.pid_drive_set(48_in, DRIVE_SPEED , true, false);
   chassis.pid_wait();
-
-  chassis.pid_drive_set(-48_in, DRIVE_SPEED , true);
+  chassis.pid_drive_set(-48_in, DRIVE_SPEED , true, false);
   chassis.pid_wait();
 }
 
@@ -85,15 +84,6 @@ void turn_example() {
 ///
 void drive_and_turn() {
   chassis.pid_drive_set(24_in, DRIVE_SPEED, true);
-  chassis.pid_wait();
-
-  chassis.pid_turn_set(45_deg, TURN_SPEED);
-  chassis.pid_wait();
-
-  chassis.pid_turn_set(-45_deg, TURN_SPEED);
-  chassis.pid_wait();
-
-  chassis.pid_turn_set(0_deg, TURN_SPEED);
   chassis.pid_wait();
 
   chassis.pid_drive_set(-24_in, DRIVE_SPEED, true);
@@ -1154,4 +1144,139 @@ void Left_counter_7(){
   intake.move(0);
   chassis.pid_drive_set(0, 110);
   pros::delay(10000);
+}
+
+void skills_106(){
+  chassis.odom_theta_set(180);
+  //Getting 6 balls out of barrier!!!
+  Wing.set(true);
+  intake.move(127);
+  chassis.pid_drive_set(600_in, 50);
+  MatchLoad.set(true);
+  pros::delay(800);
+  chassis.pid_drive_set(600_in, 50);
+  pros::delay(300);
+  MatchLoad.set(false);
+  chassis.pid_drive_set(600_in, 20);
+  pros::delay(1500);
+  MatchLoad.set(true);
+  chassis.pid_drive_set(-30_in, 127);
+  chassis.pid_wait();
+
+  DSR::reset_tracking(R, F);
+
+  ////middle goal scoring
+  //move to the right area
+  chassis.pid_odom_set({{58_in, 51_in}, rev, DRIVE_SPEED}, true);
+  chassis.pid_wait_quick_chain();
+
+  //fully align
+  MatchLoad.set(false);
+  chassis.drive_set(-60,-60);
+  pros::delay(700);
+  chassis.pid_turn_set(-145_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  //constant pressure for scoring
+  chassis.drive_set(-20,-20);
+  Middle.set(true);
+
+  //finicky stuff to make sure it doesn't jam
+  intake.move(-60);
+  outtake.move(-90);
+  pros::delay(200);
+  intake.move(90);
+  pros::delay(2000);
+
+  //get the last ball
+  chassis.pid_turn_set(-135_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+  chassis.drive_set(-20,-20);
+  pros::delay(200);
+  Middle.set(false);
+  outtake.move(0);
+  chassis.pid_drive_set(9_in, DRIVE_SPEED / 2);
+  chassis.pid_wait_quick();
+
+  //realign
+  chassis.pid_drive_set(-13_in,40);
+  pros::delay(600);
+  Middle.set(true);
+  outtake.move(-90);
+  pros::delay(1300);
+  intake.move(127);
+  Middle.set(false);
+  outtake.move(0);
+
+  //// Matchloading and long goal scoring
+  //go to general area
+  chassis.pid_odom_set({{23_in, 23_in}, fwd, DRIVE_SPEED}, true);
+
+  //get three extra balls
+  pros::delay(500);
+  MatchLoad.set(true);
+  chassis.pid_wait_quick_chain();
+
+  //turn to face matchloader
+  chassis.pid_turn_set(-180_deg, TURN_SPEED);
+  chassis.pid_wait_quick();
+
+  //reset position
+  DSR::reset_tracking(R, F);
+
+  //go to long goal to score three balls
+  chassis.pid_odom_set({{19_in, 36_in}, rev, DRIVE_SPEED}, true);
+  chassis.pid_wait_quick_chain();
+  chassis.drive_set(-40,-40);
+  outtake.move(127);
+  pros::delay(1500);
+  outtake.move(0);
+
+  //matchload
+  chassis.pid_odom_set({{{19_in, 20_in}, fwd, DRIVE_SPEED},{{19_in, 0_in}, fwd, DRIVE_SPEED / 2}});
+  pros::delay(1500);
+
+  //go to other side
+  chassis.pid_odom_set({{{4_in, 35_in}, rev, DRIVE_SPEED},{{5_in, 95_in}, rev, DRIVE_SPEED}, {{20_in, 110_in}, rev, DRIVE_SPEED}});
+  chassis.pid_wait_quick_chain();
+
+  //turn to face matchloader
+  chassis.pid_turn_set(0_deg, TURN_SPEED);
+  chassis.pid_wait_quick();
+
+  //reset position
+  DSR::reset_tracking(L, F);
+
+  //score in long goal
+  chassis.pid_odom_set({{19_in, 85_in}, rev, DRIVE_SPEED / 2}, true);
+
+  //dont score too early
+  pros::delay(750);
+
+  //score
+  outtake.move(127);
+  pros::delay(2000);
+  outtake.move(0);
+
+  //reset position
+  DSR::reset_tracking(L, F);
+
+  // matchload
+  chassis.pid_odom_set({{{20_in, 120_in}, fwd, DRIVE_SPEED}, {{20_in, 144_in}, fwd, DRIVE_SPEED / 2}}, true);
+  pros::delay(1500);
+
+  //go to long goal
+  chassis.pid_odom_set({{19_in, 85_in}, rev, DRIVE_SPEED / 2}, true);
+
+  //dont score too early
+  pros::delay(1000);
+
+  //score
+  outtake.move(127);
+  pros::delay(1000);
+
+  //change speed to score more
+  outtake.move(90);
+  pros::delay(1000);
+  outtake.move(0);
 }
